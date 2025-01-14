@@ -66,7 +66,7 @@ function NavBox(props: { children: React.ReactNode }) {
 }
 
 function Bullet() {
-   return <span className="bp1:w-[12px] bp1:h-[12px] absolute left-[-27px] top-[7px] bg-[#fdfdfd] block rounded-full"></span>;
+   return <span className="bp1:w-[12px] bp1:h-[12px] absolute left-[-27px] top-[7px] bg-gray-700 block rounded-full"></span>;
 }
 
 function BlogPost() {
@@ -121,14 +121,14 @@ function Bio() {
    return <section className="content-section" id="bio">
       <SectionHeader name="bio"/>
       <div className="float-right ml-4 mb-1 mt-2">
-         <img className="float-right rounded-lg max-w-[250px] w-[50vw]" src="res/me.jpg"  />
+         <img className="float-right rounded-lg max-w-[250px] w-[50vw]" src="res/me.jpg" alt="Picture of me" />
          <p className="text-xs text-center">Venice, Italy</p>
       </div>
       <div className="bio-text">
          <p className="mb-4">
             Hi, I'm Mukunda Johnson, a software engineer with a non-traditional background.
             I didn't go to college or have any formal computer-science classes.
-            I was home-schooled, and my youth involved a lot of construction, the family trade.
+            I was home-schooled, and my youth involved a lot of construction work, the family trade.
             I've built two houses from the grass up, living in the second one for the past several years.
             Programming is just something I've always enjoyed. Everything I know in tech has never involved a teacher, but I wouldn't discredit all of the amazing people in the developer community that have contributed to my knowledge over the last 25 years.
             I have an extensive history in hobbyist projects.
@@ -137,19 +137,19 @@ function Bio() {
             For my professional life in tech, I've worked with many clients, from individuals to small businesses to enterprises;
             a lot of remote work recently, with the last role being with <a href="https://crossover.com">Crossover</a>.
             I've grown very competent with a wide range of technologies, given my broad history.
-            I enjoy working with clients to reach practical solutions, and I'd like to think they enjoy working with me, too.
+            I enjoy working with clients to reach practical solutions, and they usually appreciate the thorough and expressive approach I take to consulting.
          </p>
          <p className="mb-4">
             If you're curious about my name's origin, it's inspired from <a href="https://www.iskcon.org/">ISKCON</a> culture,
             a branch of Hinduism that sprouted in New York in the 60s.
-            The translation of <i>Mukunda</i> is "giver of liberation," and my middle name is Das, which indicates I'm the servant to the giver of liberation (God).
+            The translation of <i>Mukunda</i> is <i>giver of liberation,</i> and my middle name is Das, which indicates I'm the servant to the giver of liberation (God).
             I'm very open-minded and avoid religious comparisons or conversation for the most part, but the core values of ISKCON are vegetarianism,
             ethical living, and spiritual growth.
          </p>
          <p className="mb-4">
-            For fun, if I'm not working on some odd project, I'm usually playing World of Warcraft.
+            For fun, if I'm not working on some odd project like this landing page, I'm usually playing World of Warcraft.
             I enjoy raid-leading and performing with the top 0.5% of players in the world.
-            I think it helps keep the brain refreshed.
+            It helps keep the brain refreshed.
             Most of my friends who I relate with have been "online," and that trend still continues.
             Other things I enjoy are writing, travel (when money and inspiration permits), and keeping fit.
             I've made it more of a priority recently to stay healthy.
@@ -226,12 +226,17 @@ function Projects() {
          </ProjectEntry>
 
          <ProjectEntry name="Skipp and Friends" year={2009} href="https://www.romhacking.net/homebrew/72/" stack="#assembly #snes">
-            Programming the SNES by yourself is not for the faint of heart. It was no wonder that the active developer community for this console could be counted on one hand. This is a fun little game that I made for the SNES, complete with audio support from my snesmod library. Music is from various friends in #mod_shrine EsperNet.
+            Programming the SNES by yourself is not for the faint of heart.
+            It was no wonder that the active developer community for this console could be counted on one hand.
+            This was a fun project, complete with audio support from my snesmod library.
+            Music is from various friends in #mod_shrine EsperNet.
+            This game is published via the <i>Super 4 in 1 Multicart</i>.
          </ProjectEntry>
 
          <ProjectEntry name="snesmod" year={2009} href="https://github.com/mukunda-/snesmod" stack="#assembly #snes #c++">
             This is a premium SNES audio library that supports streaming audio from the
             SNES processor to the SPC coprocessor while playing rich Impulse Tracker music.
+            Only a few commercial SNES games like Star Ocean have that functionality.
          </ProjectEntry>
 
          <ProjectEntry name="Super Wings" year={2008} href="https://github.com/mukunda-/superwings" stack="#c #gba">
@@ -256,9 +261,9 @@ function BusinessCard() {
    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
    </svg>;
 
-   return <div className="business-card flex border-2 rounded-lg w-[3.5in] h-[2in] p-4 px-5 box-border items-center justify-between relative m-auto">
+   return <div className="business-card flex border shadow-lg  w-[3.5in] h-[2in] p-4 px-5 box-border items-center justify-between relative m-auto text-gray-900">
    <div className="">
-      <img src="res/bcard-qr.png" width="100px"/>
+      <img src="res/bcard-qr.png" width="100px" alt="QR Code for mukunda.com"/>
    </div>
    <div>
       <div className="business-card-headline text-sm font-medium absolute top-4 left-4 right-4 text-center tracking-[0.02em] leading-none">
@@ -281,14 +286,14 @@ function BusinessCard() {
 function Contact() {
    return <section className="content-section" id="contact">
       <SectionHeader name="contact"/>
-      <p className="mb-4">Here is my virtual business card. You can print it if you like.</p>
+      <p className="mb-4">Have a virtual business card. 🤝</p>
       <BusinessCard/>
    </section>;
 }
 
 function Footer() {
    return <footer className="p-4 py-8 pb-16 m-auto text-center font-light text-xs">
-      <p className="">© 2025 Mukunda Johnson — Designed with ❤️</p>
+      <p className="mb-2">© 2025 Mukunda Johnson – Designed with ❤️</p>
       <p><a href="#top">Back to top</a></p>
    </footer>;
 }
@@ -307,8 +312,13 @@ function ContentSection(props: {
 }
 
 function Root() {
-   const [showNav, setShowNav] = useState(false);
-   const [showContent, setShowContent] = useState(false);
+   let instaLoad = false;
+   if((window.performance.getEntries()[0] as PerformanceNavigationTiming)?.type == 'reload'){
+      instaLoad = true;
+   }
+
+   const [showNav, setShowNav] = useState(instaLoad);
+   const [showContent, setShowContent] = useState(instaLoad);
 
    useEffect(() => {
       setTimeout(() => {

@@ -7,19 +7,19 @@ html {
 
 body {
    font-family: 'Poppins', sans-serif;
-   background-color: #070707;
-   color: #fdfdfd;
+   color: #444;
    overflow-y: scroll;
+   @apply text-gray-700 bg-gray-50;
 }
 
 ::selection {
-   background-color: red;
-   color: #fdfdfd;
+   background-color: theme('colors.gray.300');
+   /* color: #fdfdfd; */
 }
 
 .curtains {
+   @apply bg-gray-50;
    position: fixed;
-   background: #070707;
    top: 0;
    left: 0;
    right: 0;
@@ -68,7 +68,7 @@ body {
 }
 
 .prism-text-1, .prism-text-2, .prism-text-3 {
-   mix-blend-mode: screen;
+   mix-blend-mode: multiply;
    position: absolute;
    width: 100%;
    top: 0;
@@ -78,30 +78,31 @@ body {
 }
 
 .prism-text-1 {
-   color: #f11;
+   color: #f55;
       opacity: 0;
       /* animation: prism-text-1-animation 2s 0s forwards, fade-out 1s 2s forwards; */
 }
 
 .prism-text-2 {
-   color: #3f0;
+   color: #5f5;
       opacity: 0;
       /* animation: prism-text-2-animation 2s 0s forwards, fade-out 1s 2s forwards; */
 }
 
 .prism-text-3 {
-   color: #11f;
+   color: #55f;
       opacity: 0;
       /* animation: prism-text-3-animation 2s 0s forwards, fade-out 1s 2s forwards ; */
 }
 
 .prism-text-0 {
+   color: #222;
    opacity: 1;
    /* animation: fade-in 0.5s 2s forwards; */
 }
 
 .prism-text-0-drop {
-   color: rgba(253,253,253,0.1);
+   color: rgba(1,1,1,0.1);
    
    transition: color 0.5s;
    
@@ -110,40 +111,6 @@ body {
    background-color: red;
    
 }
-
-@keyframes prism-text-1-animation {
-   from {
-      transform: translate(-18px, -0px);
-      opacity: 0;
-   }
-   to {
-      transform: translate(-4px, 0px);
-      opacity: 1;
-   }
-}
-@keyframes prism-text-2-animation {
-   from {
-      transform: translate(18px, -0px);
-      opacity: 0;
-     
-   }
-   to {
-      transform: translate(0px, 0px);
-      opacity: 1;
-   }
-}
-@keyframes prism-text-3-animation {
-   from {
-      transform: translate(0px, 0px);
-      opacity: 0;
-     
-   }
-   to {
-      transform: translate(0px, 0px);
-      opacity: 1;
-   }
-}
-
 
 @keyframes prism-text-1-animation2 {
    from {
@@ -181,10 +148,11 @@ body {
 .navbutton {
    opacity: 0;
    animation: fade-in 2s  forwards;
-   text-decoration: underline 3px #fdfdfd;
+   text-decoration: underline 3px theme('colors.gray.300');
 }
 
 .navbutton:hover {
+   text-decoration: underline 3px theme('colors.red.500');
 }
 
 .funground {
@@ -194,10 +162,7 @@ body {
 }
 
 .section-header {
-   @apply text-2xl font-bold;
-   @apply border-b-2;
-   border-color: #fdfdfd;
-   @apply mb-4;
+   @apply text-2xl font-bold border-b-[3px] border-gray-300 mb-4;
 }
 
 .blog-excerpt {
@@ -207,7 +172,7 @@ body {
 }
 
 .dissonance {
-   text-shadow: -3px 0px 0px rgba(255,0,0,0.65), 2px 0px 0px rgba(0,0,255,1);
+   /* text-shadow:  1px 0px 0px rgba(255,0,0,0.5), -1px 0px 0px rgba(0,255,0,0.5); */
 }
 
 .content-section {
@@ -223,9 +188,14 @@ a {
    text-decoration: underline;
 }
 
+
+.section-header {
+   @apply text-gray-600;
+}
+
 .section-header a {
    text-decoration: none;
-   text-shadow: -3px 0px 0px rgba(255,0,0,0.75), 2px 0px 0px rgba(0,0,255,1), -3px 3px 0px #070707, 3px 3px 0px #070707;
+   text-shadow: -2px 2px 0px #fdfdfd, 2px 2px 0px #fdfdfd;
    position: relative;
    top: 5px;
 }
