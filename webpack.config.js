@@ -45,7 +45,7 @@ export default (env, argv) => {
       devtool,
       entry: {
          hello: {
-            import: ["./src/hello.tsx", "./src/hello.css"],
+            import: ["./src/index.tsx", "./src/main.css"],
             filename: "./bundle.js"
          },
          // Add other entry points here to create additional bundle files.
