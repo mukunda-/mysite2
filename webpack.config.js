@@ -109,7 +109,7 @@ export default (env, argv) => {
             },
             // Additional copies can be added here.
             {
-               from: './res/*.jpg',
+               from: './res/*',
                to: '',
             },
             // {

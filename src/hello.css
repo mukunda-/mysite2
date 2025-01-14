@@ -9,9 +9,13 @@ body {
    font-family: 'Poppins', sans-serif;
    background-color: #070707;
    color: #fdfdfd;
+   overflow-y: scroll;
 }
 
-
+::selection {
+   background-color: red;
+   color: #fdfdfd;
+}
 
 .curtains {
    position: fixed;
@@ -20,8 +24,6 @@ body {
    left: 0;
    right: 0;
    bottom: 0;
-}
-.curtains {
    transform: skew(45deg, 45deg);
    animation: skew-animation 2s forwards , fade-out 0s 2s forwards;
 }
@@ -54,6 +56,15 @@ body {
    to {
      opacity: 1;
    }
+}
+
+.fade-in-wait {
+   opacity: 0;
+}
+
+.fade-in {
+   opacity: 1;
+   transition: opacity 2s;
 }
 
 .prism-text-1, .prism-text-2, .prism-text-3 {
@@ -190,14 +201,31 @@ body {
 }
 
 .blog-excerpt {
-   font-family: 'Open Sans', serif;
+   /* font-family: 'JetBrains Mono', sans-serif; */
+   line-height: 1.5em;
    @apply font-normal;
 }
 
 .dissonance {
-   text-shadow: -3px 0px 0px rgba(255,0,0,0.75);
+   text-shadow: -3px 0px 0px rgba(255,0,0,0.65), 2px 0px 0px rgba(0,0,255,1);
 }
 
 .content-section {
    @apply m-4 mt-10;
+}
+
+.bio-text {
+   /* font-family: 'JetBrains Mono', serif; */
+   line-height: 1.5em;
+}
+
+a {
+   text-decoration: underline;
+}
+
+.section-header a {
+   text-decoration: none;
+   text-shadow: -3px 0px 0px rgba(255,0,0,0.75), 2px 0px 0px rgba(0,0,255,1), -3px 3px 0px #070707, 3px 3px 0px #070707;
+   position: relative;
+   top: 5px;
 }
