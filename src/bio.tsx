@@ -22,7 +22,7 @@ export function Bio() {
             For my professional life in tech, I've worked with many clients, from individuals to small businesses to enterprises;
             a lot of remote work recently, with the last role being with <a href="https://crossover.com">Crossover</a>.
             I've grown very competent with a wide range of technologies, given my broad history.
-            I enjoy working with clients to reach practical solutions, and they usually appreciate the thorough and expressive approach I take to consulting.
+            I enjoy working with clients to reach practical solutions, and they usually appreciate the thorough and proactive approach I take to consulting.
          </p>
          <p className="mb-4">
             If you're curious about my name's origin, it's inspired from <a href="https://www.iskcon.org/">ISKCON</a> culture,

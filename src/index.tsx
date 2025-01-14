@@ -18,11 +18,11 @@ function NavButton(props: {
    order: number;
 }) {
    const order = props.order ?? 0;
-   return <a href={props.href}><div className="navbutton font-bold text-lg px-4 py-2 m-4 inline-block dissonance overflow-hidden" style={
+   return <div className="navbutton font-bold text-lg px-4 py-2 m-4 inline-block dissonance overflow-hidden" style={
       {
          animationDelay: `${order * 0.15}s`,
       }
-   }>{props.children}</div></a>;
+   }><a href={props.href}>{props.children}</a></div>;
    
 }
 
@@ -99,7 +99,7 @@ function Root() {
                   <NavButton order={3} href="https://linkedin.com/in/mukunda-johnson/">#linkedin</NavButton>
                   <NavButton order={4} href="https://github.com/mukunda-">#github</NavButton>
                   <NavButton order={5} href="https://mukunda.com/portfolio#">#hobbyist-portfolio</NavButton>
-                  <NavButton order={6} href="mailto:me@mukunda.com">#contact</NavButton>
+                  <NavButton order={6} href="#contact">#contact</NavButton>
                </NavBox>
             </>
          }

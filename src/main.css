@@ -145,13 +145,13 @@ body {
    }
 }
 
-.navbutton {
+.navbutton a {
    opacity: 0;
    animation: fade-in 2s  forwards;
    text-decoration: underline 3px theme('colors.gray.300');
 }
 
-.navbutton:hover {
+.navbutton a:hover {
    text-decoration: underline 3px theme('colors.red.500');
 }
 

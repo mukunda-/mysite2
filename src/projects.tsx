@@ -9,6 +9,10 @@ function ProjectEntry(props: {
    stack: string;
    children: React.ReactNode;
 }) {
+   const nameCleaned = props.name.toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+
    return <div className="project mb-4">
       <div className="flex gap-3 items-center">
          <div className="text-lg font-bold relative dissonance"><Bullet/><a href={props.href}>{props.name}</a></div>
@@ -16,7 +20,9 @@ function ProjectEntry(props: {
          <div className="font-light text-xs ">{props.stack}</div>
          <div className="font-light text-neutral-600">{props.year}</div>
          </div>
+      <img className="float-right ml-3 rounded-md" src={`res/p-${nameCleaned}.png`} alt="thumbnail" width="80"/>
       {props.children}
+      <div className="clear-both"></div>
    </div>;
 }
 
@@ -30,7 +36,7 @@ export function Projects() {
             A fun collaborative canvas with infinite resolution. Not finished yet.
          </ProjectEntry>
          
-         <ProjectEntry name="Dropnote" year={2024} href="https://www.getdropnote.com/" stack="#golang #k8s #typescript #react #nestjs #chrome-ext">
+         <ProjectEntry name="Dropnote" year={2024} href="https://www.getdropnote.com/" stack="#golang #k8s #typescript #react #nestjs #chrome">
             A SaaS application. Golang container backend. React/Typescript client and Chrome extension. NestJS SaaS/infrastructure management backend. Still growing.
          </ProjectEntry>
 
@@ -39,7 +45,7 @@ export function Projects() {
          </ProjectEntry>
 
          <ProjectEntry name="Gig" year={2022} href="https://github.com/mukunda-/Gig" stack="#csharp">
-            A handy personal tool to track time spent on tasks to chart in a CSV later. I wrote this when I needed to better manage my time in a flexible role; also to practice C#.
+            A handy personal tool to track time spent on tasks to chart in a CSV later. I wrote this when I needed to better manage my time in a flexible role and manage SLAs; also to practice C#.
          </ProjectEntry>
 
          <ProjectEntry name="ovpnkeys" year={2021} href="https://github.com/mukunda-/ovpnkeys" stack="#python #openvpn">
@@ -78,7 +84,7 @@ export function Projects() {
             This game is published via the <i>Super 4 in 1 Multicart</i>.
          </ProjectEntry>
 
-         <ProjectEntry name="snesmod" year={2009} href="https://github.com/mukunda-/snesmod" stack="#assembly #snes #c++">
+         <ProjectEntry name="snesmod" year={2009} href="https://github.com/mukunda-/snesmod" stack="#arm-assembly #snes #c++">
             This is a premium SNES audio library that supports streaming audio from the
             SNES processor to the SPC coprocessor while playing rich Impulse Tracker music.
             Only a few commercial SNES games like Star Ocean have that functionality.
@@ -88,7 +94,7 @@ export function Projects() {
             A fun GameBoy® Advance game.
          </ProjectEntry>
 
-         <ProjectEntry name="Maxmod" year={2008} href="https://maxmod.org/" stack="#asm #gba #ds">
+         <ProjectEntry name="Maxmod" year={2008} href="https://maxmod.org/" stack="#arm-assembly #gba #nds">
             A comprehensive audio engine for the GameBoy® Advance and Nintendo DS. It supports several tracker music formats and software mixing. It can extend the Nintendo® DS's 16 audio channels with additional software channels. Written entirely in ARM assembly.
          </ProjectEntry>
       </div>
