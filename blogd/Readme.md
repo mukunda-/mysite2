@@ -1,0 +1,1 @@
+I wanted to write something stupid in Rust, like a fastcgi app, but I didn't need this.
