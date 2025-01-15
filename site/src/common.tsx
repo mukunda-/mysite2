@@ -39,7 +39,6 @@ export async function loadBlogContent(content: string, path: string): Promise<Bl
    let blogContent = "";
 
    const headers: Record<string, string> = {};
-   let lastKey = "_";
    for (let i = 0; i < lines.length; i++) {
       if (lines[i].trim() == "") {
          blogContent = lines.slice(i + 1).join("\n");
@@ -50,7 +49,6 @@ export async function loadBlogContent(content: string, path: string): Promise<Bl
       key = key.trim().toLowerCase();
       value = value.trim();
       headers[key] = value.trim();
-      lastKey = key;
    }
 
    const renderer = new marked.Renderer();
@@ -102,7 +100,9 @@ export async function getBlogIndex() {
    if (blogIndexCache !== undefined) return blogIndexCache;
 
    try {
-      blogIndexCache = await (await fetch("/mysite2/blog-content/index.json")).json();
+      // Bust the cache every 5 minutes.
+      const cacheBuster = Math.floor(new Date().getTime() / (1000 * 60 * 5));
+      blogIndexCache = await (await fetch(`/mysite2/blog-content/index.json?c=${cacheBuster}`)).json();
    } catch (e) {
       console.error("Couldn't load blog content.");
    }

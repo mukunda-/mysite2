@@ -6,16 +6,16 @@ export function Bio() {
    return <section className="content-section" id="bio">
       <SectionHeader name="bio"/>
       <div className="float-right ml-4 mb-1 mt-2">
-         <img className="float-right rounded-lg max-w-[250px] w-[50vw]" src="res/me.jpg" alt="Picture of me" />
+         <img className="float-right rounded-lg max-w-[250px] w-[50vw]" src="/mysite2/res/me.jpg" alt="Picture of me" />
          <p className="text-xs text-center">Venice, Italy</p>
       </div>
       <div className="bio-text">
          <p className="mb-4">
-            Hey there! I'm Mukunda Johnson, a seasoned self-taught developer. None of what I know today was ordered through a university or computer-science class. Programming is just something I've always enjoyed.
+            Hey there! I'm Mukunda Johnson, a seasoned self-taught developer. None of what I know today was ordered through a university or CS class. Programming is just something I've always enjoyed.
          </p>
-         <p className="mb-4">  
-            Oddly enough, it's pretty bizarre to my family. I was home-schooled, and my family's trade is construction work; my youth involved a lot of that. I've built two houses from the grass up, living in the second one for the past several years.
-         <p className="mb-4">  
+         <p className="mb-4">
+            Oddly enough, my interests are pretty bizarre to my family. I was home-schooled, and my family's trade is construction work; my youth involved a lot of that. I've built two houses from the grass up, living in the second one for the past several years.
+         <p className="mb-4">
          </p>
             Despite the disconnection, I've spent nearly my entire life toying with computers. I have an extensive history in hobbyist projects. I say self-taught, but I wouldn't discredit all of the amazing people in the developer community that have contributed to my knowledge over the last 25 years.
          </p>

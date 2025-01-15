@@ -20,7 +20,7 @@ function ProjectEntry(props: {
          <div className="font-light text-xs ">{props.stack}</div>
          <div className="font-light text-neutral-600">{props.year}</div>
          </div>
-      <img className="float-right ml-3 rounded-md" src={`res/p-${nameCleaned}.png`} alt="thumbnail" width="80"/>
+      <img className="float-right ml-3 rounded-md" src={`/mysite2/res/p-${nameCleaned}.png`} alt="thumbnail" width="80"/>
       {props.children}
       <div className="clear-both"></div>
    </div>;
@@ -49,7 +49,7 @@ export function Projects() {
          </ProjectEntry>
 
          <ProjectEntry name="ovpnkeys" year={2021} href="https://github.com/mukunda-/ovpnkeys" stack="#python #openvpn">
-            Honestly I don't remember much about this. I wanted to simplify creating openvpn profiles, and openssl is a very deep rabbit hole. Here's a <a href="http://localhost/blog/2022/openvpn-and-certificates">blog article</a>.
+            Honestly I don't remember much about this. I wanted to simplify creating openvpn profiles, and openssl is a very deep rabbit hole. Here's a <a href="/blog/2022/openvpn-and-certificates">blog article</a>.
          </ProjectEntry>
 
          <ProjectEntry name="smtpy" year={2021} href="https://github.com/mukunda-/smtpy" stack="#python #email">

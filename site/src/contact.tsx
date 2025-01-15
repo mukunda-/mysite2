@@ -13,7 +13,7 @@ function BusinessCard() {
 
    return <div className="business-card flex border shadow-lg  w-[3.5in] h-[2in] p-4 px-5 box-border items-center justify-between relative m-auto text-gray-900">
    <div className="">
-      <img src="res/bcard-qr.png" width="100px" alt="QR Code for mukunda.com"/>
+      <img src="/mysite2/res/bcard-qr.png" width="100px" alt="QR Code for mukunda.com"/>
    </div>
    <div>
       <div className="business-card-headline text-sm font-medium absolute top-4 left-4 right-4 text-center tracking-[0.02em] leading-none">

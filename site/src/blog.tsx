@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BlogContent, BlogIndexEntry, Bullet, getBlogIndex, loadBlogContent, loadBlogContentFromPath, SectionHeader } from "./common";
+import { BlogContent, BlogIndexEntry, Bullet, getBlogIndex, loadBlogContentFromPath, SectionHeader } from "./common";
 import { Link } from "react-router-dom";
 
 function formatDate(date?: string) {

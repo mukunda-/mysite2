@@ -112,6 +112,10 @@ export default (env, argv) => {
                from: './res/*',
                to: './mysite2/',
             },
+            {
+               from: './res/favicon.png',
+               to: './',
+            },
             // {
             //    from: './manifest.json',
             //    to: '',
