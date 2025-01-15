@@ -105,16 +105,23 @@ func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // ---------------------------------------------------------------------------------------
 func main() {
-	listener, err := net.Listen("tcp", ":9000")
-	handler := new(myHandler)
-	if err != nil {
-		panic(err)
+
+	var listener net.Listener
+
+	if OS == "WINDOWS" {
+		// Debug mode for windows, listening on a specific port.
+		var err error
+		listener, err = net.Listen("tcp", ":9000")
+		if err != nil {
+			panic(err)
+		}
+		defer listener.Close()
 	}
 
-	defer listener.Close()
+	handler := new(myHandler)
 
 	print("listening!")
-	err = fcgi.Serve(listener, handler)
+	err := fcgi.Serve(listener, handler)
 	if err != nil {
 		panic(err)
 	}

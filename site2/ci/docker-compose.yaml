@@ -1,0 +1,12 @@
+# Cross-compiler for Ubuntu.
+services:
+  builder:
+    build:
+      context: ..
+    command: cp site2 /output/mysite2.fcgi
+# chmod u+x gen.py
+# && ./gen.py
+# && go build
+# && cp main /output/mysite2
+    volumes:
+      - ./output:/output

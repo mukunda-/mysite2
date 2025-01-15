@@ -1,4 +1,8 @@
-import os
+#!/usr/bin/env python3
+import subprocess as sp
 
-os.system("templ generate")
-os.system("npx tailwindcss -i \"./style/main.css\" -o \"./gens/main.css\" --minify")
+def run(cmd):
+    sp.run(cmd, shell=True, check=True)
+
+run("templ generate")
+run("npx tailwindcss -i \"./style/main.css\" -o \"./gens/main.css\" --minify")
