@@ -1,0 +1,97 @@
+package plates
+
+templ projectEntry(name string, year string, href string, stack string) {
+   <div class="project mb-4">
+      <div class="flex gap-3 items-center">
+         <div class="text-lg font-bold relative dissonance">
+            @Bullet()
+            <a href={templ.URL(href)}>{name}</a>
+         </div>
+         <div class="flex-grow"></div>
+         <div class="font-light text-xs ">{stack}</div>
+         <div class="font-light text-neutral-600">{year}</div>
+      </div>
+      <img class="float-right ml-3 rounded-md" src={projectThumbnail(name)} alt="thumbnail" width="80"/>
+      {children...}
+      <div class="clear-both"></div>
+   </div>
+}
+
+//----------------------------------------------------------------------------------------
+templ projects() {
+   <section class="content-section" id="projects">
+      @SectionHeader("projects")
+      <p class="mb-4">
+         A handful of neat endeavors of mine. Much of my professional work is proprietary and/or can't be shared, so these are mostly personal projects.
+      </p>
+      <div class="projects">
+         @projectEntry("Nanopaint", "2025", "https://github.com/mukunda-/nanopaint", "#golang #typescript #react") {
+            A fun collaborative canvas with infinite resolution. Not finished yet.
+         }
+         
+         @projectEntry("Dropnote", "2024", "https://www.getdropnote.com/", "#golang #k8s #typescript #react #nestjs #chrome") {
+            A SaaS application. Golang container backend. React/Typescript client and Chrome extension. NestJS SaaS/infrastructure management backend. Still growing.
+         }
+
+         @projectEntry("Puggle Chat", "2023", "https://puggle.chat", "#golang #typescript #react") {
+            An anonymous chat server. It's a rite of passage for a programmer to write a chat server.
+         }
+
+         @projectEntry("Gig", "2022", "https://github.com/mukunda-/Gig", "#csharp") {
+            A handy personal tool to track time spent on tasks to chart in a CSV later. I wrote this when I needed to better manage my time in a flexible role and manage SLAs; also to practice C#.
+         }
+
+         @projectEntry("ovpnkeys", "2021", "https://github.com/mukunda-/ovpnkeys", "#python #openvpn") {
+            Honestly I don't remember much about this. I wanted to simplify creating openvpn profiles, and openssl is a very deep rabbit hole. Here's a <a href="/blog/2022/openvpn-and-certificates">blog article</a>.
+         }
+
+         @projectEntry("smtpy", "2021", "https://github.com/mukunda-/smtpy", "#python #email") {
+            This is a tool I made to simplify reproduction of issues with email networking. A <i>smtpyfile</i> contains delivery parameters and email content, basically a test case for your engineering team.
+         }
+
+         @projectEntry("Hobbyist Portfolio", "2020", "https://mukunda.com/portfolio", "#javascript #glsl #html") {
+            This is a WebGL application I made to demonstrate expertise in web development while also showing my hobbyist projects. It uses no libraries and is written from scratch.
+         }
+
+         @projectEntry("Game of Life", "2020", "https://mukunda.com/gameoflife/", "#javascript") {
+            An implementation of Conway's Game of Life.
+         }
+         
+         @projectEntry("Tetris: Source", "2014", "https://github.com/mukunda-/vg-tetris", "#sourcemod") {
+            A tetris game that runs inside of Counter-Strike or other Source games. <a href="https://kotaku.com/you-shouldnt-interrupt-a-counter-strike-players-game-of-1596498787#!">Featured on Kotaku</a>.
+         }
+
+         @projectEntry("Super Mareo Bruhs", "2013", "https://github.com/mukunda-/vg-supermareo", "#sourcemod") {
+            A Mario game that runs inside of Counter-Strike or other Source games. <a href="https://www.pcgamer.com/csgo-super-mareo-bruhs/">Featured on PC Gamer</a>. Extremely cool how this works internally - a completely server-side hosted game-within-a-game that had no intention of supporting such a thing. Smooth side-scrolling and all!
+         }
+
+         @projectEntry("supernsf", "2009", "https://github.com/mukunda-/supernsf", "#assembly #nes #c") {
+            A ridiculously fun project that mixes PCM via carefully crafted code. The CPU cycles were hand-counted to time the output of each sample. The sequencer also supports other NES audio channels and extension chips.
+         }
+
+         @projectEntry("Skipp and Friends", "2009", "https://www.romhacking.net/homebrew/72/", "#assembly #snes") {
+            Programming the SNES by yourself is not for the faint of heart.
+            It was no wonder that the active developer community for this console could be counted on one hand.
+            This was a fun project, complete with audio support from my snesmod library.
+            Music is from various friends in #mod_shrine EsperNet.
+            This game is published via the <i>Super 4 in 1 Multicart</i>.
+         }
+
+         @projectEntry("snesmod", "2009", "https://github.com/mukunda-/snesmod", "#arm-assembly #snes #c++") {
+            This is a premium SNES audio library that supports streaming audio from the
+            SNES processor to the SPC coprocessor while playing rich Impulse Tracker music.
+            Only a few commercial SNES games like Star Ocean have that functionality.
+         }
+
+         @projectEntry("Super Wings", "2008", "https://github.com/mukunda-/superwings", "#c #gba") {
+            A fun GameBoy® Advance game.
+         }
+
+         @projectEntry("Maxmod", "2008", "https://maxmod.org/", "#arm-assembly #gba #nds") {
+            A comprehensive audio engine for the GameBoy® Advance and Nintendo DS. It supports several tracker music formats and software mixing. It can extend the Nintendo® DS's 16 audio channels with additional software channels. Written entirely in ARM assembly.
+         }
+      </div>
+      <p>You can visit my <a href="https://mukunda.com/projects.html">old projects page</a> that contains some other fun things. My <a href="https://mukunda.com/portfolio">Hobbyist Portfolio</a> also shows many of my old projects.</p>
+   </section>
+}
+

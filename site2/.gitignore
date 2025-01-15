@@ -1,4 +1,5 @@
 __debug_bin*
 *_templ.go
 gens
-ci/output
+ci/build
+node_modules

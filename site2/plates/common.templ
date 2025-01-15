@@ -1,11 +1,21 @@
 package plates
 
 templ topWrapper() {
-   <div className="max-w-[800px] m-auto" id="top">
+   <div class="max-w-[800px] m-auto" id="top">
       { children... }
    </div>
 }
 
 templ topSpacer() {
    <div class="h-[50vh]"></div>
+}
+
+templ SectionHeader(name string) {
+   <div class="section-header dissonance"><a href={templ.URL("#" + name)}>
+      <span class="bp1:absolute bp1:-left-9 bp1:-top-0 bp1:text-3xl">#</span>{name}</a> {children...}
+   </div>
+}
+
+templ Bullet() {
+   <span class="bp1:w-[12px] bp1:h-[12px] absolute left-[-27px] top-[7px] bg-gray-600 block rounded-full"></span>
 }

@@ -1,10 +1,20 @@
 package plates
 
 templ footer() {
-   <footer class="p-4 py-8 pb-16 m-auto text-center font-light text-xs">
-      <p class="mb-2">© 2025 Mukunda Johnson – Designed with ❤️</p>
-      <p><a href="#top">Back to top</a></p>
-   </footer>
+}
+
+
+templ contentSection() {
+   <div class="fade-in-wait fade-in">
+      //@blog()
+      @bio()
+      @projects()
+      //@contact()
+      <footer class="p-4 py-8 pb-16 m-auto text-center font-light text-xs">
+         <p class="mb-2">© 2025 Mukunda Johnson – Designed with ❤️</p>
+         <p><a href="#top">Back to top</a></p>
+      </footer>
+   </div>
 }
 
 templ MainPage() {
@@ -26,6 +36,7 @@ templ MainPage() {
             @navButton(5, "https://mukunda.com/portfolio", "#hobbyist-portfolio")
             @navButton(6, "#contact", "#contact")
          }
+         @contentSection()
       }
    }
 }

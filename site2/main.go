@@ -100,6 +100,12 @@ func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Debug only - these are normally served by the above layer.
+	if strings.HasPrefix(r.URL.Path, "/mysite2/res/") {
+		http.ServeFile(w, r, r.URL.Path[9:])
+		return
+	}
+
 	http.NotFound(w, r)
 }
 
