@@ -1,0 +1,31 @@
+package plates
+
+templ footer() {
+   <footer class="p-4 py-8 pb-16 m-auto text-center font-light text-xs">
+      <p class="mb-2">© 2025 Mukunda Johnson – Designed with ❤️</p>
+      <p><a href="#top">Back to top</a></p>
+   </footer>
+}
+
+templ MainPage() {
+   @head() {
+      @topWrapper() {
+         @topSpacer()
+         <div class="px-4 text-2xl translate-y-[-50%] text-center font-bold overflow-hidden">
+            @prismText() {
+               Dissonance is when two notes clash. &nbsp;Harmony is boring.
+            }
+            @curtains()
+         </div>
+
+         @navBox() {
+            @navButton(1, "#bio", "#bio")
+            @navButton(2, "#projects", "#projects")
+            @navButton(3, "https://linkedin.com/in/mukunda-johnson/", "#linkedin")
+            @navButton(4, "https://github.com/mukunda-", "#github")
+            @navButton(5, "https://mukunda.com/portfolio", "#hobbyist-portfolio")
+            @navButton(6, "#contact", "#contact")
+         }
+      }
+   }
+}

@@ -1,0 +1,16 @@
+package plates
+
+//import "fmt"
+
+templ navButton(order int, href string, text string) {
+
+   <div class="navbutton font-bold text-lg px-4 py-2 m-4 inline-block dissonance overflow-hidden">
+      <a href={templ.URL(href)}>{text}</a>
+   </div>
+}
+
+templ navBox() {
+   <div class="text-center">
+      {children...}
+   </div>
+}

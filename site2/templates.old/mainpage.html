@@ -1,0 +1,24 @@
+{{define "topspacer"}}
+<div class="h-[50vh]"></div>
+{{end}}
+
+{{define "footer"}}
+  <footer class="p-4 py-8 pb-16 m-auto text-center font-light text-xs">
+     <p class="mb-2">© 2025 Mukunda Johnson – Designed with ❤️</p>
+     <p><a href="#top">Back to top</a></p>
+  </footer>
+{{end}}
+
+{{define "ContentSection"}}
+HELLO WORLD
+{{end}}
+
+{{define "inner-content"}}
+{{template "ContentSection"}}
+{{end}}
+
+{{with `FUCK`}}
+{{template "topwrapper" .}}
+{{end}}
+
+abc
