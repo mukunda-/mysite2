@@ -1,16 +1,28 @@
 import express from "express";
 import fs from "fs";
 import * as url from 'url';
+import dotenv from 'dotenv';
 //import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 console.log("test-server dirname", __dirname);
+dotenv.config();
 
 const app = express();
 const port = 80;
 
 // Serve the dist folder.
 app.use(express.static('dist'));
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/dist/index.html');
+});
+app.get('/blog/*', (req, res) => {
+    res.sendFile(__dirname + '/dist/index.html');
+});
+
+const blog_content = process.env.BLOG_CONTENT;
+app.use('/mysite2/blog-content', express.static(blog_content));
 
 // Example reverse proxy configuration, to forward requests to a backend.
 // app.use('/api', createProxyMiddleware({

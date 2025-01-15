@@ -46,7 +46,7 @@ export default (env, argv) => {
       entry: {
          hello: {
             import: ["./src/index.tsx", "./src/main.css"],
-            filename: "./bundle.js"
+            filename: "./mysite2/bundle.js"
          },
          // Add other entry points here to create additional bundle files.
       },
@@ -110,7 +110,7 @@ export default (env, argv) => {
             // Additional copies can be added here.
             {
                from: './res/*',
-               to: '',
+               to: './mysite2/',
             },
             // {
             //    from: './manifest.json',

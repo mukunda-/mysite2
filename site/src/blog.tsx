@@ -1,44 +1,76 @@
-import React from "react";
-import { Bullet, SectionHeader } from "./common";
+import React, { useEffect, useState } from "react";
+import { BlogContent, BlogIndexEntry, Bullet, getBlogIndex, loadBlogContent, loadBlogContentFromPath, SectionHeader } from "./common";
+import { Link } from "react-router-dom";
 
+function formatDate(date?: string) {
+   if (!date) return "Somewhen";
+
+   const dateparts = date.split("-");
+   const year = dateparts[0].substring(2);
+   const month = dateparts[1].replace(/^0/, "");
+   const day = dateparts[2].replace(/^0/, "");
+   return month + "/" + day + "/" + year;
+}
 //----------------------------------------------------------------------------------------
-function BlogPost() {
+function BlogExcerpt(props: {
+   data?: BlogIndexEntry;
+}) {
+
+   const [content, setContent] = useState<BlogContent|undefined>(undefined);
+
+   useEffect(() => {
+      if (!props.data?.path) return;
+
+      let cancel = false;
+      void (async () => {
+         if (!props.data?.path) return;
+         const content = await loadBlogContentFromPath(props.data.path);
+         if (cancel) return;
+         setContent(content);
+      })();
+
+      return () => {
+         cancel = true;
+      };
+   }, [props.data?.path]);
+
+   if (!props.data) return <></>;
+   const href = `/blog/${props.data?.path.replace(".md", "").replace(".txt", "")}`;
+   const datestring = formatDate(props.data.pdate);
+
    return <div className="blog-post mt-3">
       <div className="flex justify-between items-center">
-         <div className="blog-post-title text-lg font-bold relative underline dissonance"><Bullet/>Can LLMs Solve Software Engineering?</div>
-         <div className="blog-post-date text-sm opacity-70 font-light">2025-01-13</div>
+         <div className="blog-post-title text-lg font-bold relative underline dissonance"><Bullet/><Link to={href}>{props.data.name}</Link></div>
+         <div className="blog-post-date text-sm opacity-70 font-light">{datestring}</div>
       </div>
-      <div className="blog-excerpt ">
-         <p className="mb-3">
-         No doubt you have noticed the excitement surrounding LLMs
-and their ability to solve problems. Everyone wants to shape
-them into disruptive products that will revolutionize old
-processes, especially in the software engineering domain.
-         </p>
-         <p className="mb-3">But can LLMs really get past the wall of reasoning to write
-good code? Honestly, I don't know for sure. There are big
-bets on <i>agentic</i> workflows breaking the reasoning boundary,
-but with my programmer background it's easy to remain
-skeptical. Here is one way to look at it: when you ask an
-LLM to multiply two very large numbers, such as
-7380580207762439311 and 237196197329347341, no doubt an LLM
-by itself will get it wrong, because the answer is not
-written somewhere. However, today's models <i>do</i> get it
-right by including training to generate code scripts,
-basically using a calculator.
-            </p>
-            <p className="mb-3">In other words, basic arithmetic is a simple enough concept
-for an LLM's training to handle, to translate the question
-into code to execute... (Read more)</p>
+      <div className="blog-content blog-excerpt"
+         dangerouslySetInnerHTML={{ __html: content?.htmlContent ?? "" }}>
+      </div>
+      <div className="border-t-4 border-gray-300 text-center">
+         <Link to={href}>Read more</Link>
       </div>
    </div>;
 }
 
 //----------------------------------------------------------------------------------------
 export function Blog() {
-   return <section className="blog-section content-section" id="blog">
-      <SectionHeader name="blog"/>
-      <BlogPost/>
-      <BlogPost/>
+   const [index, setIndex] = useState<BlogIndexEntry[]|undefined>([] as BlogIndexEntry[]);
+
+   useEffect(() => {
+      getBlogIndex().then((index) => {
+         if (index) setIndex(index);
+      });
+   }, []);
+
+   const excerpts: JSX.Element[] = [];
+   for (let i = 0; i < 5; i++) {
+      excerpts.push(<BlogExcerpt key={i} data={index ? index[i] : undefined}/>);
+   }
+   
+   return <section className="blog-section content-section relative" id="blog">
+      <SectionHeader name="blog"></SectionHeader>
+      <Link to="/blog/index" className="text-normal font-bold absolute right-0 top-2.5">&gt;&gt; View All</Link>
+      {excerpts}
+      <p className="font-bold"><Link to="/blog/index" className="">&gt;&gt; Blog Index</Link></p>
    </section>;
 }

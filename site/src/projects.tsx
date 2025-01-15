@@ -49,7 +49,7 @@ export function Projects() {
          </ProjectEntry>
 
          <ProjectEntry name="ovpnkeys" year={2021} href="https://github.com/mukunda-/ovpnkeys" stack="#python #openvpn">
-            Honestly I don't remember much about this. I wanted to simplify creating openvpn profiles, and openssl is a very deep rabbit hole.
+            Honestly I don't remember much about this. I wanted to simplify creating openvpn profiles, and openssl is a very deep rabbit hole. Here's a <a href="http://localhost/blog/2022/openvpn-and-certificates">blog article</a>.
          </ProjectEntry>
 
          <ProjectEntry name="smtpy" year={2021} href="https://github.com/mukunda-/smtpy" stack="#python #email">

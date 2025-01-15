@@ -11,17 +11,18 @@ export function Bio() {
       </div>
       <div className="bio-text">
          <p className="mb-4">
-            Hi, I'm Mukunda Johnson, a software engineer with a non-traditional background.
-            I didn't go to college or have any formal computer-science classes.
-            I was home-schooled, and my youth involved a lot of construction work, the family trade.
-            I've built two houses from the grass up, living in the second one for the past several years.
-            Programming is just something I've always enjoyed. Everything I know in tech has never involved a teacher, but I wouldn't discredit all of the amazing people in the developer community that have contributed to my knowledge over the last 25 years.
-            I have an extensive history in hobbyist projects.
+            Hey there! I'm Mukunda Johnson, a seasoned self-taught developer. None of what I know today was ordered through a university or computer-science class. Programming is just something I've always enjoyed.
+         </p>
+         <p className="mb-4">  
+            Oddly enough, it's pretty bizarre to my family. I was home-schooled, and my family's trade is construction work; my youth involved a lot of that. I've built two houses from the grass up, living in the second one for the past several years.
+         <p className="mb-4">  
+         </p>
+            Despite the disconnection, I've spent nearly my entire life toying with computers. I have an extensive history in hobbyist projects. I say self-taught, but I wouldn't discredit all of the amazing people in the developer community that have contributed to my knowledge over the last 25 years.
          </p>
          <p className="mb-4">
             For my professional life in tech, I've worked with many clients, from individuals to small businesses to enterprises;
             a lot of remote work recently, with the last role being with <a href="https://crossover.com">Crossover</a>.
-            I've grown very competent with a wide range of technologies, given my broad history.
+            I've grown very competent with a broad range of technologies.
             I enjoy working with clients to reach practical solutions, and they usually appreciate the thorough and proactive approach I take to consulting.
          </p>
          <p className="mb-4">

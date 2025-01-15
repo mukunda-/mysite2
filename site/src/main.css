@@ -75,41 +75,33 @@ body {
    left: 0;
    user-select: none;
    pointer-events: none;
-}
-
-.prism-text-1 {
-   color: #f55;
-      opacity: 0;
-      /* animation: prism-text-1-animation 2s 0s forwards, fade-out 1s 2s forwards; */
-}
-
-.prism-text-2 {
-   color: #5f5;
-      opacity: 0;
-      /* animation: prism-text-2-animation 2s 0s forwards, fade-out 1s 2s forwards; */
-}
-
-.prism-text-3 {
-   color: #55f;
-      opacity: 0;
-      /* animation: prism-text-3-animation 2s 0s forwards, fade-out 1s 2s forwards ; */
+   opacity: 0;
 }
 
 .prism-text-0 {
    color: #222;
    opacity: 1;
-   /* animation: fade-in 0.5s 2s forwards; */
+}
+
+.prism-text-1 {
+   color: #f55;
+}
+
+.prism-text-2 {
+   color: #5f5;
+}
+
+.prism-text-3 {
+   color: #55f;
 }
 
 .prism-text-0-drop {
    color: rgba(1,1,1,0.1);
-   
    transition: color 0.5s;
-   
 }
+
 .prism-text-0::selection {
    background-color: red;
-   
 }
 
 @keyframes prism-text-1-animation2 {
@@ -122,6 +114,7 @@ body {
       opacity: 1;
    }
 }
+
 @keyframes prism-text-2-animation2 {
    from {
       transform: translate(0px, 0px);
@@ -133,6 +126,7 @@ body {
       opacity: 1;
    }
 }
+
 @keyframes prism-text-3-animation2 {
    from {
       transform: translate(0px, 0px);
@@ -145,9 +139,13 @@ body {
    }
 }
 
-.navbutton a {
+.navbutton {
    opacity: 0;
    animation: fade-in 2s  forwards;
+
+}
+
+.navbutton a {
    text-decoration: underline 3px theme('colors.gray.300');
 }
 
@@ -180,7 +178,6 @@ body {
 }
 
 .bio-text {
-   /* font-family: 'JetBrains Mono', serif; */
    line-height: 1.5em;
 }
 
@@ -188,6 +185,9 @@ a {
    text-decoration: underline;
 }
 
+a:hover {
+   text-decoration: underline 1px theme('colors.red.500');
+}
 
 .section-header {
    @apply text-gray-600;
@@ -198,4 +198,37 @@ a {
    text-shadow: -2px 2px 0px #fdfdfd, 2px 2px 0px #fdfdfd;
    position: relative;
    top: 5px;
+}
+
+.blog-excerpt {
+   @apply max-h-[400px] overflow-y-hidden;
+}
+
+.blog-content p {
+   @apply mb-4;
+}
+.blog-content img {
+   @apply rounded-md;
+}
+.blog-content pre {
+   @apply mb-4 p-4 bg-gray-200 rounded-md;
+   font-family: 'PT Mono', monospace;
+}
+
+.blog-content ul {
+   @apply list-disc list-outside ml-8 mb-4;
+}
+
+.blog-content ol {
+   @apply list-decimal list-outside ml-8 mb-4;
+}
+
+.blog-content h2 {
+   @apply text-xl font-bold mt-4 mb-2;
+}
+.blog-content h3 {
+   @apply text-lg font-bold mt-4 mb-2;
+}
+.blog-content blockquote {
+   @apply border-l-4 border-gray-300 pl-4;
 }
