@@ -5,7 +5,13 @@ import "go.mukunda.com/site2/blog"
 //----------------------------------------------------------------------------------------
 templ blogExcerpt(header blog.BlogHeader) {
    {{ href := `/blog/` + header.Path }}
-   {{ datestring := header.Pdate }}
+   {{ datestring := header.Date }}
+   {{ content := blog.GetBlogHtmlContent(header.Path) }}
+   
+   if content.Name == "" {
+      <div></div>
+      {{ return }}
+   }
 
    <div class="blog-post mt-3">
       <div class="flex justify-between items-center">
@@ -16,7 +22,7 @@ templ blogExcerpt(header blog.BlogHeader) {
          <div class="blog-post-date text-sm opacity-70 font-light">{datestring}</div>
       </div>
       <div class="blog-content blog-excerpt">
-         @templ.Raw(blog.GetBlogHtmlContent(header.Path))
+         @templ.Raw(content.Html)
       </div>
       <div class="border-t-4 border-gray-300 text-center">
          <a href={templ.URL(href)}>Read more</a>

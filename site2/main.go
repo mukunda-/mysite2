@@ -8,6 +8,7 @@ import (
 	"net/http/fcgi"
 	"strings"
 
+	"go.mukunda.com/site2/blog"
 	"go.mukunda.com/site2/plates"
 )
 
@@ -16,93 +17,77 @@ import (
 //go:embed gens/*
 var embedFS embed.FS
 
-//var plates = template.Must(template.ParseFS(templateFS, "templates/*"))
-
 type myHandler struct{}
 
-// // ---------------------------------------------------------------------------------------
-// func getErrorTemplate() *template.Template {
-// 	if errorTemplate != nil {
-// 		return errorTemplate
-// 	}
-
-// 	tmpl, err := template.New("error").Parse("[Error Loading Template]")
-// 	if err != nil {
-// 		panic("Error creating error template")
-// 	}
-// 	errorTemplate = tmpl
-
-// 	return errorTemplate
-// }
-
-// // ---------------------------------------------------------------------------------------
-// func getTemplate(name string) *template.Template {
-// 	if tmpl, ok := templateCache[name]; ok {
-// 		return tmpl
-// 	}
-
-// 	// Load the template from the templates folder
-// 	content, err := templateFS.ReadFile("templates/" + name)
-// 	if err != nil {
-// 		return getErrorTemplate()
-// 	}
-
-// 	// Cache the template for future use
-// 	tmpl, err := template.New(name).Parse(string(content))
-// 	if err != nil {
-// 		return getErrorTemplate()
-// 	}
-// 	templateCache[name] = tmpl
-
-// 	return tmpl
-// }
-
-// func plateStr(name string, data any) string {
-// 	var res bytes.Buffer
-
-// 	if err := plates.ExecuteTemplate(&res, name, data); err != nil {
-// 		return "[Error rendering template]"
-// 	}
-
-// 	return res.String()
-// }
+func (h *myHandler) InternalServerError(w http.ResponseWriter) {
+	http.Error(w, "Internal error", http.StatusInternalServerError)
+}
 
 // ---------------------------------------------------------------------------------------
-// func MainPage() string {
-// 	var body = plateStr("mainpage.html", nil)
-// 	var s = struct {
-// 		Body template.HTML
-// 	}{
-// 		Body: template.HTML(body),
-// 	}
-// 	var res bytes.Buffer
-
-// 	if err := plates.ExecuteTemplate(&res, "head.html", s); err != nil {
-// 		return "[Error rendering template]"
-// 	}
-
-// 	return res.String()
-// }
+func (h *myHandler) NotFound(w http.ResponseWriter, r *http.Request) {
+	http.NotFound(w, r)
+}
 
 // ---------------------------------------------------------------------------------------
-func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (h *myHandler) Root(w http.ResponseWriter, r *http.Request) {
+	err := plates.MainPage().Render(context.Background(), w)
+	if err != nil {
+		h.InternalServerError(w)
+		return
+	}
+}
 
-	if r.URL.Path == "/" {
-		err := plates.MainPage().Render(context.Background(), w)
-		if err != nil {
-			http.Error(w, "Internal error", http.StatusInternalServerError)
-		}
+// ---------------------------------------------------------------------------------------
+func (h *myHandler) Blog(w http.ResponseWriter, r *http.Request) {
+	post := blog.GetBlogHtmlContent(r.URL.Path[6:])
+	if post.Name == "" || post.Html == "" {
+		h.NotFound(w, r)
 		return
 	}
 
-	if strings.HasPrefix(r.URL.Path, "/mysite2/gens/") {
-		http.ServeFileFS(w, r, embedFS, r.URL.Path[9:])
+	err := plates.BlogPage(post).Render(context.Background(), w)
+	if err != nil {
+		h.InternalServerError(w)
+		return
+	}
+}
+
+func (h *myHandler) BlogIndex(w http.ResponseWriter, r *http.Request) {
+	posts := blog.GetBlogIndex()
+	err := plates.BlogIndexPage(posts).Render(context.Background(), w)
+	if err != nil {
+		h.InternalServerError(w)
+		return
+	}
+}
+
+// ---------------------------------------------------------------------------------------
+func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	path := strings.ToLower(r.URL.Path)
+
+	if path == "/" {
+		h.Root(w, r)
+		return
+	}
+
+	if path == "/blog/index" {
+		h.BlogIndex(w, r)
+		return
+	}
+
+	if strings.HasPrefix(path, "/blog/") {
+		h.Blog(w, r)
+		return
+	}
+
+	if strings.HasPrefix(path, "/mysite2/gens/") {
+		http.ServeFileFS(w, r, embedFS, path[9:])
 		return
 	}
 
 	// Debug only - these are normally served by the above layer.
-	if strings.HasPrefix(r.URL.Path, "/mysite2/res/") {
-		http.ServeFile(w, r, r.URL.Path[9:])
+	if strings.HasPrefix(path, "/mysite2/res/") {
+		http.ServeFile(w, r, path[9:])
 		return
 	}
 

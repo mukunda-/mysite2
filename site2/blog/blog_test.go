@@ -21,7 +21,7 @@ Date: Xyz
 func TestParsingImage(t *testing.T) {
 
 	converted := convertBlogHtmlContent(blog2, "2020/blog2")
-	assert.NotContains(t, converted, "Foo")
-	assert.Contains(t, converted, `alt="img1"`)
-	assert.Contains(t, converted, `src="/mysite2/blog-content/2020/media/image1.png"`)
+	assert.NotContains(t, converted.Html, "Foo")
+	assert.Contains(t, converted.Html, `alt="img1"`)
+	assert.Contains(t, converted.Html, `src="/mysite2/blog-content/2020/media/image1.png"`)
 }

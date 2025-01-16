@@ -1,0 +1,39 @@
+package plates
+
+import "go.mukunda.com/site2/blog"
+
+//----------------------------------------------------------------------------------------
+templ blogIndexEntry(data blog.BlogHeader) {
+	{{ date := formatBlogDate(data.Date) }}
+   <tr>
+      <td class="opacity-70 text-xs pr-2">{date}</td>
+      <td class="font-bold">
+         <a href={templ.URL("/blog/" + data.Path)}>{data.Name}</a>
+      </td>
+   </tr>
+}
+
+//----------------------------------------------------------------------------------------
+templ BlogIndexPage(index []blog.BlogHeader) {
+   @head() {
+      @topWrapper() {
+         <div class="p-4">
+            <p class="font-bold"><a href="/" class="">&lt;&lt; Home</a></p>
+            <div class="mt-20">
+               @sectionHeader("blog-index")
+               <table>
+                  <tbody>
+                     for _, entry := range index {
+                        @blogIndexEntry(entry)
+                     }
+                  </tbody>
+               </table>
+               <footer class="text-xs mt-4 mb-10 text-center">
+                  <p class="mb-2">© 2025 Mukunda Johnson – Designed with ❤️</p>
+                  <p><a href="#top">Back to top</a> | <a href="/">Home</a></p>
+               </footer>
+            </div>
+         </div>
+      }
+   }
+}

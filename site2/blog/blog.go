@@ -18,11 +18,18 @@ import (
 // Blog reading utilities
 
 type BlogHeader struct {
-	Name  string
-	Date  string
-	Pdate string
-	Year  string
-	Path  string
+	Name string
+	Date string
+	Year string
+	Path string
+}
+
+type BlogPost struct {
+	Name string
+	Date string
+	Year string
+	Path string
+	Html string
 }
 
 var blogContentPath string = "mysite2/blog-content/"
@@ -63,9 +70,39 @@ func GetBlogIndex() []BlogHeader {
 	return index
 }
 
-func convertBlogHtmlContent(content string, path string) string {
-	folder := strings.Split(path, "/")[0]
-	content = stripHeader.ReplaceAllString(content, "")
+func convertBlogHtmlContent(content string, path string) BlogPost {
+	content = strings.ReplaceAll(content, "\r", "")
+	folder, _, _ := strings.Cut(path, "/")
+
+	var result BlogPost
+
+	for {
+		header, rest, found := strings.Cut(content, "\n")
+		if !found {
+			return result
+		}
+		content = rest
+
+		if strings.TrimSpace(header) == "" {
+			break
+		}
+
+		key, value, found := strings.Cut(header, ":")
+		if !found {
+			continue
+		}
+
+		key = strings.TrimSpace(key)
+		key = strings.ToLower(key)
+		value = strings.TrimSpace(value)
+		if key == "name" {
+			result.Name = value
+		} else if key == "date" {
+			result.Date = value
+		}
+	}
+	result.Year = folder // "Year" is a bad name, we really want the folder name.
+	result.Path = path
 
 	p := parser.New()
 	doc := p.Parse([]byte(content))
@@ -74,20 +111,21 @@ func convertBlogHtmlContent(content string, path string) string {
 			return renderHook(w, node, entering, folder)
 		},
 	})
-	return string(markdown.Render(doc, renderer))
+	result.Html = string(markdown.Render(doc, renderer))
+	return result
 }
 
-func GetBlogHtmlContent(path string) string {
+func GetBlogHtmlContent(path string) BlogPost {
 	ckey := "blog-" + path
 	cached, ok := gcache.Get(ckey)
 	if ok {
-		return cached.(string)
+		return cached.(BlogPost)
 	}
 
 	path = blogContentPath + path + ".md"
 	content, err := os.ReadFile(path)
 	if err != nil {
-		return ""
+		return BlogPost{}
 	}
 
 	converted := convertBlogHtmlContent(string(content), path)
