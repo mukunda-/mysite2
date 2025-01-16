@@ -22,5 +22,5 @@ COPY . /app/
 
 RUN \. /root/.nvm/nvm.sh \
    && chmod u+x ./gen.py \
-   && ./gen.py \
+   && go generate . \
    && go build

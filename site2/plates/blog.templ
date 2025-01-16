@@ -35,13 +35,13 @@ templ blogSection() {
    {{ index := blog.GetBlogIndex() }}
    <section class="blog-section content-section relative" id="blog">
       @sectionHeader("blog")
-      <a href="/blog/index" class="text-normal font-bold absolute right-0 top-2.5">&gt;&gt; View All</a>
+      <a href="/blog/index" class="text-normal font-bold absolute right-0 top-2.5">View All &gt;&gt;</a>
          for i := 0; i < 5; i++ {
             if i >= len(index) {
                break
             }
             @blogExcerpt(index[i])
          }
-      <p class="font-bold"><a href="/blog/index">&gt;&gt; Blog Index</a></p>
+      <p class="font-bold"><a href="/blog/index">Blog Index &gt;&gt;</a></p>
    </section>
 }

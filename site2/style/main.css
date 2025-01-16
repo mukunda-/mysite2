@@ -240,6 +240,9 @@ a:hover {
    @apply mb-4 p-4 bg-gray-200 rounded-md overflow-x-auto;
    font-family: 'PT Mono', monospace;
 }
+.blog-content code {
+   font-family: 'PT Mono', monospace;
+}
 
 .blog-content ul {
    @apply list-disc list-outside ml-8 mb-4;
@@ -259,4 +262,12 @@ a:hover {
 
 .blog-content blockquote {
    @apply border-l-4 border-gray-300 pl-4;
+}
+
+.blog-content.blog-excerpt h2 {
+   @apply text-lg;
+}
+
+.blog-content.blog-excerpt h3 {
+   @apply text-base;
 }

@@ -5,4 +5,4 @@ def run(cmd):
     sp.run(cmd, shell=True, check=True)
 
 run("templ generate")
-run("npx tailwindcss -i \"./style/main.css\" -o \"./gens/main.css\" --minify")
+run("npm run build")

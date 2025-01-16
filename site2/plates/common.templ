@@ -6,10 +6,6 @@ templ topWrapper() {
    </div>
 }
 
-templ topSpacer() {
-   <div class="h-[50vh]"></div>
-}
-
 templ sectionHeader(name string) {
    <div class="section-header dissonance"><a href={templ.URL("#" + name)}>
       <span class="bp1:absolute bp1:-left-9 bp1:-top-0 bp1:text-3xl">#</span>{name}</a> {children...}

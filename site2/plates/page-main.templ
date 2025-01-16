@@ -20,7 +20,9 @@ templ contentSection() {
 templ MainPage() {
    @head() {
       @topWrapper() {
-         @topSpacer()
+         // Slightly above the middle, to account for the address bar on mobile.
+         // Above center looks OK, below center looks bad.
+         <div class="h-[calc(50vh-50px)]"></div>
          <div class="px-4 text-2xl translate-y-[-50%] text-center font-bold overflow-hidden">
             @prismText() {
                Dissonance is when two notes clash. &nbsp;Harmony is boring.

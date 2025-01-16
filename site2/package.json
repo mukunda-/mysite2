@@ -8,7 +8,7 @@
     "dev:webpack": "webpack --mode development --watch",
     "dev:tailwind": "tailwindcss --watch -i ./style/main.css -o ./gens/main.css",
     "dev": "concurrently npm:dev:*",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production && tailwindcss -i ./style/main.css -o ./gens/main.css --minify",
     "build-dev": "webpack --mode development"
   },
   "keywords": [],

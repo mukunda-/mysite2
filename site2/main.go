@@ -19,13 +19,19 @@ var embedFS embed.FS
 
 type myHandler struct{}
 
+// ---------------------------------------------------------------------------------------
 func (h *myHandler) InternalServerError(w http.ResponseWriter) {
-	http.Error(w, "Internal error", http.StatusInternalServerError)
+	http.Error(w, "Something went wrong. Try reloading.", http.StatusInternalServerError)
 }
 
 // ---------------------------------------------------------------------------------------
 func (h *myHandler) NotFound(w http.ResponseWriter, r *http.Request) {
-	http.NotFound(w, r)
+	w.WriteHeader(http.StatusNotFound)
+	err := plates.NotFoundPage().Render(context.Background(), w)
+	if err != nil {
+		h.InternalServerError(w)
+		return
+	}
 }
 
 // ---------------------------------------------------------------------------------------
@@ -52,6 +58,7 @@ func (h *myHandler) Blog(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// ---------------------------------------------------------------------------------------
 func (h *myHandler) BlogIndex(w http.ResponseWriter, r *http.Request) {
 	posts := blog.GetBlogIndex()
 	err := plates.BlogIndexPage(posts).Render(context.Background(), w)
@@ -91,7 +98,7 @@ func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.NotFound(w, r)
+	h.NotFound(w, r)
 }
 
 // ---------------------------------------------------------------------------------------
@@ -99,18 +106,22 @@ func main() {
 	var listener net.Listener
 
 	if OS == "WINDOWS" {
-		// Debug mode for windows, listening on a specific port.
+		print("Starting server on port 9000.")
+		// For Windows, we need to listen on a TCP port. 9000 is standard for FastCGI.
 		var err error
 		listener, err = net.Listen("tcp", ":9000")
 		if err != nil {
 			panic(err)
 		}
 		defer listener.Close()
+	} else {
+		print("Starting server on stdin/socket.")
+		// For Linux, we listen on stdin. Note that this will panic if the application
+		// is executed in a terminal, since stdin won't be a socket.
 	}
 
 	handler := new(myHandler)
 
-	print("listening!")
 	err := fcgi.Serve(listener, handler)
 	if err != nil {
 		panic(err)
