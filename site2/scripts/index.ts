@@ -32,8 +32,29 @@ async function fadeAnimations() {
 }
 
 //----------------------------------------------------------------------------------------
+function cipher(text: string, offset: number, addper: number) {
+   let result = "";
+   let z = 0;
+   for (let i = 0; i < text.length; i++) {
+      result += String.fromCharCode(((text.charCodeAt(i) - 32 - offset + 95 + z) % 95) + 32);
+      z += addper;
+   }
+   return result;
+}
 
+//----------------------------------------------------------------------------------------
+function showContactDetails() {
+   // Contact details are ciphered until the page renders, so as to avoid spam bots.
+   for (const elem of document.getElementsByClassName("my-email")) {
+      (elem as HTMLDivElement).innerText = cipher(`^W3ajalf][)_lk`, -15, -1);
+   }
+
+   for (const elem of document.getElementsByClassName("my-phone")) {
+      (elem as HTMLDivElement).innerText = cipher(`'"$!),*%.-04`, -15, -1);
+   }
+}
 
 window.addEventListener('scroll', initialScrollListener);
 setTimeout(initialScrollListener, 50);
 fadeAnimations();
+showContactDetails();
