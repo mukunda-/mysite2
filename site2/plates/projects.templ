@@ -4,7 +4,7 @@ templ projectEntry(name string, year string, href string, stack string) {
    <div class="project mb-4">
       <div class="flex gap-3 items-center">
          <div class="text-lg font-bold relative dissonance">
-            @Bullet()
+            @bullet()
             <a href={templ.URL(href)}>{name}</a>
          </div>
          <div class="flex-grow"></div>
@@ -20,7 +20,7 @@ templ projectEntry(name string, year string, href string, stack string) {
 //----------------------------------------------------------------------------------------
 templ projects() {
    <section class="content-section" id="projects">
-      @SectionHeader("projects")
+      @sectionHeader("projects")
       <p class="mb-4">
          A handful of neat endeavors of mine. Much of my professional work is proprietary and/or can't be shared, so these are mostly personal projects.
       </p>

@@ -1,0 +1,14 @@
+{
+   "version": "2.0.0",
+   "tasks": [
+      {
+         "label": "Generate templates",
+         "type": "shell",
+         "command": "templ",
+         "args": [
+            "generate"
+         ],
+         "problemMatcher": []
+      }
+   ]
+}

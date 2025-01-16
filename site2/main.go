@@ -111,7 +111,6 @@ func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // ---------------------------------------------------------------------------------------
 func main() {
-
 	var listener net.Listener
 
 	if OS == "WINDOWS" {

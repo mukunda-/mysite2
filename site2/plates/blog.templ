@@ -1,0 +1,41 @@
+package plates
+
+import "go.mukunda.com/site2/blog"
+
+//----------------------------------------------------------------------------------------
+templ blogExcerpt(header blog.BlogHeader) {
+   {{ href := `/blog/` + header.Path }}
+   {{ datestring := header.Pdate }}
+
+   <div class="blog-post mt-3">
+      <div class="flex justify-between items-center">
+         <div class="blog-post-title text-lg font-bold relative underline dissonance">
+            @bullet()
+            <a href={templ.URL(href)}>{header.Name}</a>
+         </div>
+         <div class="blog-post-date text-sm opacity-70 font-light">{datestring}</div>
+      </div>
+      <div class="blog-content blog-excerpt">
+         @templ.Raw(blog.GetBlogHtmlContent(header.Path))
+      </div>
+      <div class="border-t-4 border-gray-300 text-center">
+         <a href={templ.URL(href)}>Read more</a>
+      </div>
+   </div>
+}
+
+//----------------------------------------------------------------------------------------
+templ blogSection() {
+   {{ index := blog.GetBlogIndex() }}
+   <section class="blog-section content-section relative" id="blog">
+      @sectionHeader("blog")
+      <a href="/blog/index" class="text-normal font-bold absolute right-0 top-2.5">&gt;&gt; View All</a>
+         for i := 0; i < 5; i++ {
+            if i >= len(index) {
+               break
+            }
+            @blogExcerpt(index[i])
+         }
+      <p class="font-bold"><a href="/blog/index">&gt;&gt; Blog Index</a></p>
+   </section>
+}
