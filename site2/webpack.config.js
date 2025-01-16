@@ -46,7 +46,7 @@ export default (env, argv) => {
       entry: {
          hello: {
             import: ["./scripts/index.ts"],
-            filename: "./sauce.js"
+            filename: "./mysite2/sauce.js"
          },
          // Add other entry points here to create additional bundle files.
       },

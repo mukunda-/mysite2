@@ -7,7 +7,7 @@ ENV PATH=$PATH:/usr/local/go/bin:/root/go/bin
 ENV NVM_DIR=/root/.nvm
 
 RUN apt-get update && apt-get install -y \
-   ca-certificates python3 curl \
+   ca-certificates python3 curl rsync \
    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash \
    && \. /root/.nvm/nvm.sh \
    && nvm install 22
@@ -15,12 +15,12 @@ RUN apt-get update && apt-get install -y \
 RUN \. /root/.nvm/nvm.sh \
    && curl -L -O https://go.dev/dl/go1.23.4.linux-amd64.tar.gz \
    && tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz \
-   && go install github.com/a-h/templ/cmd/templ@latest \
-   && npm i -g tailwindcss@latest 
+   && go install github.com/a-h/templ/cmd/templ@latest
 
 COPY . /app/
 
 RUN \. /root/.nvm/nvm.sh \
+   && npm install \
    && chmod u+x ./gen.py \
-   && go generate . \
+   && go generate \
    && go build

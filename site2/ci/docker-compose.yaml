@@ -3,7 +3,7 @@ services:
   builder:
     build:
       context: ..
-    # The dockerfile builds the project; we just need to copy the artifact to the volume.
-    command: cp site2 /output/mysite2.fcgi
+    # The dockerfile builds the project; we just need to copy the artifacts to the volume.
+    command: bash -c "cp site2 /output/mysite2.fcgi && rsync -a gens/ /output/gens/"
     volumes:
       - ./build:/output

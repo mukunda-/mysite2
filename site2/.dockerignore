@@ -1,7 +1,7 @@
 __debug_bin*
 .dreamhost.key
 .env
-*_templ.go
-ci/build
+.vscode
+ci
 gens
 node_modules

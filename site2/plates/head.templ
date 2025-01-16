@@ -5,9 +5,9 @@ import (
    "time"
 )
 
-var LAUNCH_TIME = fmt.Sprintf("%d", time.Now().Unix())
-
 templ head() {
+   {{ cacheBuster := fmt.Sprintf("%d", time.Now().Unix()/1000/10) }}
+
    <!DOCTYPE html>
    <html lang="en">
       <head>
@@ -18,7 +18,7 @@ templ head() {
          <meta name="viewport" content="width=device-width, initial-scale=1">
          <meta name="description" content="Mukunda Johnson's blog and personal page. Dissonance is when two notes clash. Harmony is boring.">
          <meta name="keywords" content="mukunda software engineer blog">
-         <link rel="stylesheet" href={"/mysite2/gens/main.css?c=" + LAUNCH_TIME}>
+         <link rel="stylesheet" href={"/mysite2/main.css?c=" + cacheBuster}>
          <link rel="icon" href="/favicon.png" type="image/x-icon">
          <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 
@@ -28,7 +28,7 @@ templ head() {
       </head>
       <body>
          { children... }
-         <script src={"/mysite2/gens/sauce.js?c=" + LAUNCH_TIME}></script>
+         <script src={"/mysite2/sauce.js?c=" + cacheBuster}></script>
       </body>
    </html>
 }

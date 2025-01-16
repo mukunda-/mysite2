@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteRule ^/index.html$ /mysite2.fcgi [L,QSA]
+RewriteRule ^/$ /mysite2.fcgi [L,QSA]
+RewriteRule ^blog/.*$ /mysite2.fcgi [L,QSA]

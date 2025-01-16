@@ -32,7 +32,13 @@ type BlogPost struct {
 	Html string
 }
 
-var blogContentPath string = "mysite2/blog-content/"
+// Where the files are located on disk, for loading the content and serving.
+// Default is local mysite2 folder.
+var blogContentLocalPath string = "mysite2/blog-content/"
+
+// Where the files are located on the web server, for translating image paths.
+var blogContentPath string = "/mysite2/blog-content/"
+
 var gcache = cache.New(time.Minute*5, time.Minute*10)
 var stripHeader = regexp.MustCompile(`^[\s\S]*?\r?\n\s*\r?\n`)
 
@@ -40,21 +46,12 @@ func SetBlogContentPath(path string) {
 	blogContentPath = path
 }
 
-func renderHook(w io.Writer, node ast.Node, entering bool, folder string) (ast.WalkStatus, bool) {
-	if img, ok := node.(*ast.Image); ok {
-		if strings.HasPrefix(string(img.Destination), "media/") {
-			img.Destination = []byte("/mysite2/blog-content/" + folder + "/" + string(img.Destination))
-		}
-	}
-	return ast.GoToNext, false
-}
-
 func GetBlogIndex() []BlogHeader {
 	if x, found := gcache.Get("index"); found {
 		return x.([]BlogHeader)
 	}
 
-	files, err := os.ReadFile(blogContentPath + "/index.json")
+	files, err := os.ReadFile(blogContentLocalPath + "/index.json")
 	if err != nil {
 		return []BlogHeader{}
 	}
@@ -68,6 +65,15 @@ func GetBlogIndex() []BlogHeader {
 
 	gcache.Set("index", index, cache.DefaultExpiration)
 	return index
+}
+
+func renderHook(w io.Writer, node ast.Node, entering bool, folder string) (ast.WalkStatus, bool) {
+	if img, ok := node.(*ast.Image); ok {
+		if strings.HasPrefix(string(img.Destination), "media/") {
+			img.Destination = []byte(blogContentPath + folder + "/" + string(img.Destination))
+		}
+	}
+	return ast.GoToNext, false
 }
 
 func convertBlogHtmlContent(content string, path string) BlogPost {
@@ -122,8 +128,8 @@ func GetBlogHtmlContent(path string) BlogPost {
 		return cached.(BlogPost)
 	}
 
-	path = blogContentPath + path + ".md"
-	content, err := os.ReadFile(path)
+	filepath := blogContentLocalPath + path + ".md"
+	content, err := os.ReadFile(filepath)
 	if err != nil {
 		return BlogPost{}
 	}
@@ -134,8 +140,17 @@ func GetBlogHtmlContent(path string) BlogPost {
 }
 
 func init() {
-	cp := os.Getenv("BLOG_CONTENT_PATH")
-	if cp != "" {
-		blogContentPath = cp
+	{
+		cp := os.Getenv("BLOG_CONTENT_PATH")
+		if cp != "" {
+			blogContentPath = cp
+		}
+	}
+
+	{
+		cp := os.Getenv("BLOG_CONTENT_LOCAL_PATH")
+		if cp != "" {
+			blogContentLocalPath = cp
+		}
 	}
 }

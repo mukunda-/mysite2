@@ -6,9 +6,10 @@
   "private": true,
   "scripts": {
     "dev:webpack": "webpack --mode development --watch",
-    "dev:tailwind": "tailwindcss --watch -i ./style/main.css -o ./gens/main.css",
+    "dev:tailwind": "tailwindcss --watch -i ./style/main.css -o ./gens/mysite2/main.css",
+    "dev:server": "node test-server.js",
     "dev": "concurrently npm:dev:*",
-    "build": "webpack --mode production && tailwindcss -i ./style/main.css -o ./gens/main.css --minify",
+    "build": "webpack --mode production && tailwindcss -i ./style/main.css -o ./gens/mysite2/main.css --minify",
     "build-dev": "webpack --mode development"
   },
   "keywords": [],
@@ -27,6 +28,7 @@
     "eslint": "^8.33.0",
     "eslint-webpack-plugin": "^3.2.0",
     "express": "^4.19.2",
+    "fastcgi-client": "^0.2.0",
     "marked": "^15.0.6",
     "postcss": "^8.4.24",
     "postcss-loader": "^7.3.3",

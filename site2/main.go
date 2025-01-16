@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"embed"
 	"net"
 	"net/http"
 	"net/http/fcgi"
@@ -13,9 +12,6 @@ import (
 )
 
 //go:generate ./gen.py
-
-//go:embed gens/*
-var embedFS embed.FS
 
 type myHandler struct{}
 
@@ -84,17 +80,6 @@ func (h *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if strings.HasPrefix(path, "/blog/") {
 		h.Blog(w, r)
-		return
-	}
-
-	if strings.HasPrefix(path, "/mysite2/gens/") {
-		http.ServeFileFS(w, r, embedFS, path[9:])
-		return
-	}
-
-	// Debug only - these are normally served by the above layer.
-	if strings.HasPrefix(path, "/mysite2/res/") {
-		http.ServeFile(w, r, path[9:])
 		return
 	}
 
