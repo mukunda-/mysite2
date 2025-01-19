@@ -42,6 +42,8 @@ var blogContentPath string = "/mysite2/blog-content/"
 var gcache = cache.New(time.Minute*5, time.Minute*10)
 var stripHeader = regexp.MustCompile(`^[\s\S]*?\r?\n\s*\r?\n`)
 
+var noCache = false // Makes me think of Martin Korth :)
+
 func SetBlogContentPath(path string) {
 	blogContentPath = path
 }
@@ -63,7 +65,9 @@ func GetBlogIndex() []BlogHeader {
 		return []BlogHeader{}
 	}
 
-	gcache.Set("index", index, cache.DefaultExpiration)
+	if !noCache {
+		gcache.SetDefault("index", index)
+	}
 	return index
 }
 
@@ -135,7 +139,11 @@ func GetBlogHtmlContent(path string) BlogPost {
 	}
 
 	converted := convertBlogHtmlContent(string(content), path)
-	gcache.Set(ckey, converted, cache.DefaultExpiration)
+
+	if !noCache {
+		gcache.SetDefault(ckey, converted)
+	}
+
 	return converted
 }
 
@@ -151,6 +159,13 @@ func init() {
 		cp := os.Getenv("BLOG_CONTENT_LOCAL_PATH")
 		if cp != "" {
 			blogContentLocalPath = cp
+		}
+	}
+
+	{
+		nocache := os.Getenv("BLOG_NO_CACHE")
+		if nocache == "yes" {
+			noCache = true
 		}
 	}
 }

@@ -271,3 +271,7 @@ a:hover {
 .blog-content.blog-excerpt h3 {
    @apply text-base;
 }
+
+.blog-content img {
+   @apply m-auto mb-4;
+}
